@@ -15,10 +15,10 @@ print("📦 [Loader] Loading from YOUR GitHub repository")
 -- ====================================================================
 --                    GITHUB CONFIGURATION
 -- ====================================================================
--- EDIT INI SESUAI GITHUB ANDA:
-local GITHUB_USER = "anakhitsnyabintuni01-debug"  -- ⚠️ GANTI INI
-local GITHUB_REPO = "AutoFish"      -- ⚠️ GANTI INI
-local GITHUB_BRANCH = "main"        -- atau "master"
+-- Username GitHub Anda sudah terpasang!
+local GITHUB_USER = "anakhitsnyabintuni01-debug"
+local GITHUB_REPO = "AutoFish"
+local GITHUB_BRANCH = "main"
 
 local BASE_URL = string.format(
     "https://raw.githubusercontent.com/%s/%s/%s/",
@@ -206,5 +206,4 @@ if not success then
     warn("❌ 4. Game tidak compatible")
     warn("❌ ═══════════════════════════════════════════")
 end
-
 
