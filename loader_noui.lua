@@ -23,33 +23,16 @@ local BASE_URL = string.format(
 print("📍 [Loader] Repository: " .. GITHUB_USER .. "/" .. GITHUB_REPO)
 
 -- ====================================================================
---                    DEPENDENCY CHECK
+--                    DEPENDENCY CHECK (Simplified)
 -- ====================================================================
 local function validateEnvironment()
-    local required = {
-        "game", "workspace", "Players", "RunService", 
-        "ReplicatedStorage", "HttpService"
-    }
+    -- Simple wait for essential services
+    print("⏳ [Loader] Waiting for game to be ready...")
     
-    for _, service in ipairs(required) do
-        if service == "game" or service == "workspace" then
-            if not _G[service] then
-                error("❌ Missing: " .. service)
-            end
-        else
-            local success = pcall(function()
-                game:GetService(service)
-            end)
-            if not success then
-                error("❌ Missing service: " .. service)
-            end
-        end
-    end
-    
-    local LocalPlayer = game:GetService("Players").LocalPlayer
-    if not LocalPlayer then
-        error("❌ LocalPlayer not available")
-    end
+    repeat task.wait(0.5) until game
+    repeat task.wait(0.5) until game:GetService("Players")
+    repeat task.wait(0.5) until game:GetService("Players").LocalPlayer
+    repeat task.wait(0.5) until game:GetService("ReplicatedStorage")
     
     print("✅ [Loader] Environment validated")
     return true
@@ -96,6 +79,10 @@ end
 --                    MAIN EXECUTION
 -- ====================================================================
 local function main()
+    -- Wait for executor to be ready
+    print("⏳ [Loader] Waiting for executor to stabilize...")
+    task.wait(3)
+    
     if not validateEnvironment() then
         return
     end
