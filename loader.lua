@@ -16,7 +16,7 @@ print("📦 [Loader] Loading from YOUR GitHub repository")
 --                    GITHUB CONFIGURATION
 -- ====================================================================
 -- EDIT INI SESUAI GITHUB ANDA:
-local GITHUB_USER = "YourUsername"  -- ⚠️ GANTI INI
+local GITHUB_USER = "anakhitsnyabintuni01-debug"  -- ⚠️ GANTI INI
 local GITHUB_REPO = "AutoFish"      -- ⚠️ GANTI INI
 local GITHUB_BRANCH = "main"        -- atau "master"
 
@@ -184,4 +184,5 @@ if not success then
     warn("❌ 4. Game tidak compatible")
     warn("❌ ═══════════════════════════════════════════")
 end
+
 
