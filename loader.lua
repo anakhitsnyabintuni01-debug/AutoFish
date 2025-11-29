@@ -145,11 +145,33 @@ local function main()
     print("\n⚙️ [Loader] Loading configuration...")
     Config.load()
     
-    -- Step 5: Load UI
+    -- Step 5: Wait for CoreGui to be ready
+    print("\n⏳ [Loader] Waiting for CoreGui...")
+    local CoreGui = game:GetService("CoreGui")
+    local StarterGui = game:GetService("StarterGui")
+    
+    -- Test if we can create UI elements
+    local testSuccess = pcall(function()
+        local test = Instance.new("ScreenGui")
+        test.Parent = CoreGui
+        test:Destroy()
+    end)
+    
+    if not testSuccess then
+        warn("⚠️ [Loader] CoreGui not ready, waiting...")
+        task.wait(5)
+    end
+    
+    print("✅ [Loader] CoreGui ready")
+    
+    -- Extra safety wait
+    task.wait(2)
+    
+    -- Step 6: Load UI
     print("\n🎨 [Loader] Loading UI...")
     local UI = loadModule("ui")
     
-    -- Step 6: Start main controller
+    -- Step 7: Start main controller
     print("\n🚀 [Loader] Starting main controller...")
     local Main = loadModule("main")
     Main.start({
@@ -184,5 +206,4 @@ if not success then
     warn("❌ 4. Game tidak compatible")
     warn("❌ ═══════════════════════════════════════════")
 end
-
 
