@@ -12,14 +12,44 @@ local callbacks = {}
 --                     RAYFIELD LOADER
 -- ====================================================================
 local function loadRayfield()
+    print("📦 [UI] Loading Rayfield UI library...")
+    
+    -- Wait for game to be fully ready
+    if not game:IsLoaded() then
+        print("⏳ [UI] Waiting for game to load...")
+        repeat task.wait(0.5) until game:IsLoaded()
+    end
+    
+    -- Wait for CoreGui
+    local CoreGui = game:GetService("CoreGui")
+    local StarterGui = game:GetService("StarterGui")
+    
+    -- Test UI creation capability
+    local canCreateUI = pcall(function()
+        local test = Instance.new("ScreenGui")
+        test.Parent = CoreGui
+        task.wait(0.1)
+        test:Destroy()
+    end)
+    
+    if not canCreateUI then
+        warn("⚠️ [UI] CoreGui not ready, waiting 5 seconds...")
+        task.wait(5)
+    end
+    
+    -- Extra safety wait
+    task.wait(1)
+    
+    print("🔄 [UI] Downloading Rayfield...")
     local success, Rayfield = pcall(function()
         return loadstring(game:HttpGet('https://sirius.menu/rayfield'))()
     end)
     
     if not success then
-        error("❌ Failed to load Rayfield UI library")
+        error("❌ Failed to load Rayfield UI library: " .. tostring(Rayfield))
     end
     
+    print("✅ [UI] Rayfield loaded successfully")
     return Rayfield
 end
 
