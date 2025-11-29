@@ -16,7 +16,7 @@ Target.FishDatabase = {
         bigWeight = 280000,  -- 280K kg (big variant)
         bigMaxWeight = 325000, -- 325K kg
         locations = {"Ancient Jungle"},
-        rarity = "Mythic",
+        rarity = "Secret",
         time = "All",
         weather = "All"
     },
@@ -130,4 +130,5 @@ function Target.addFish(name, minWeight, maxWeight, locations, rarity, time, wea
 end
 
 return Target
+
 
