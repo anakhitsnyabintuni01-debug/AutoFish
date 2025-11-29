@@ -16,7 +16,7 @@ print("📦 [Loader] Loading from YOUR GitHub repository")
 --                    GITHUB CONFIGURATION
 -- ====================================================================
 -- EDIT INI SESUAI GITHUB ANDA:
-local GITHUB_USER = "anakhitsnyabintuni01-debug"  -- ⚠️ GANTI INI
+local GITHUB_USER = "YourUsername"  -- ⚠️ GANTI INI
 local GITHUB_REPO = "AutoFish"      -- ⚠️ GANTI INI
 local GITHUB_BRANCH = "main"        -- atau "master"
 
@@ -167,9 +167,9 @@ local function main()
     -- Extra safety wait
     task.wait(2)
     
-    -- Step 6: Load UI
-    print("\n🎨 [Loader] Loading UI...")
-    local UI = loadModule("ui")
+    -- Step 6: Load UI (Mercury - more stable than Rayfield)
+    print("\n🎨 [Loader] Loading UI (Mercury)...")
+    local UI = loadModule("ui_mercury")
     
     -- Step 7: Start main controller
     print("\n🚀 [Loader] Starting main controller...")
