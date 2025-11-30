@@ -237,18 +237,33 @@ end
 --                     FISHING CONTROL
 -- ====================================================================
 local function startFishing()
-    if fishingActive then return end
+    print("🔍 [DEBUG] startFishing() called")
+    print("🔍 [DEBUG] fishingActive before: " .. tostring(fishingActive))
+    
+    if fishingActive then 
+        print("⚠️ [DEBUG] Already fishing, returning")
+        return 
+    end
     
     fishingActive = true
     local blatantMode = Config.get("BlatantMode")
     
     print("[Auto Fish] 🟢 Started " .. (blatantMode and "(BLATANT MODE)" or "(Normal)"))
+    print("🔍 [DEBUG] Calling Fishing.start()...")
+    print("🔍 [DEBUG] Config.Current.FishDelay: " .. tostring(Config.Current.FishDelay))
+    print("🔍 [DEBUG] Config.Current.CatchDelay: " .. tostring(Config.Current.CatchDelay))
     
     Fishing.start(Config.Current, blatantMode)
+    print("🔍 [DEBUG] Fishing.start() called successfully")
 end
 
 local function stopFishing()
-    if not fishingActive then return end
+    print("🔍 [DEBUG] stopFishing() called")
+    
+    if not fishingActive then 
+        print("⚠️ [DEBUG] Not fishing, returning")
+        return 
+    end
     
     fishingActive = false
     print("[Auto Fish] 🔴 Stopped")
@@ -316,15 +331,24 @@ function Main.start(modules)
         Teleport = Teleport,
         Target = Target,
         onAutoFishToggle = function(enabled)
+            print("🔍 [DEBUG] onAutoFishToggle callback triggered!")
+            print("🔍 [DEBUG] enabled = " .. tostring(enabled))
+            
             if enabled then
+                print("🔍 [DEBUG] Calling startFishing()...")
                 startFishing()
+                
                 -- Auto teleport if target fishing enabled
                 if Target.Current.enabled and Target.Current.autoTeleport then
+                    print("🔍 [DEBUG] Auto teleporting...")
                     autoTeleportToTarget()
                 end
             else
+                print("🔍 [DEBUG] Calling stopFishing()...")
                 stopFishing()
             end
+            
+            print("🔍 [DEBUG] onAutoFishToggle callback complete")
         end,
         onGPUSaverToggle = function(enabled)
             if enabled then
